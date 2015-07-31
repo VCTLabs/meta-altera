@@ -26,8 +26,8 @@ INHIBIT_PACKAGE_STRIP-dev = "1"
 do_compile() {
 
 	cd ${S}
-	make CROSS_COMPILE=${TARGET_PREFIX} clean
-        make CROSS_COMPILE=${TARGET_PREFIX}
+	make ARCH="arm" CROSS_COMPILE=${TARGET_PREFIX} clean
+	make ARCH="arm" CROSS_COMPILE=${TARGET_PREFIX}
 }
 
 do_install() {
