@@ -10,7 +10,8 @@ DEPENDS = "virtual/kernel"
 # git:/git.linaro.org/git-ro/arm/ds5/gator.git;protocol=http
 # This variable points to rocketboards by default. It can be overridden
 # by setting it in the shell env and by adding it to BB_WHITE_ENV
-LINUX_TEST_REPO?="http://git.rocketboards.org/linux-test"
+#LINUX_TEST_REPO?="http://git.rocketboards.org/linux-test"
+LINUX_TEST_REPO?="git://at-git/linux-test"
 LINUX_TEST_BRANCH?="master"
 LINUX_TEST_TAG?="${AUTOREV}"
 
@@ -34,7 +35,7 @@ do_install() {
 	
         echo "-------------${D}/unit-tests"
 	install -d ${D}/unit-tests
-	make INSTALLPATH=${D}/unit-tests/ install
+	make ARCH="arm" CROSS_COMPILE=${TARGET_PREFIX} INSTALLPATH=${D}/unit-tests/ install
 }
 
 FILES_${PN} = "/unit-tests/*"
