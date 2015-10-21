@@ -76,11 +76,34 @@ do_compile_dtb() {
 
 addtask compile_dtb after do_compile before do_build
 
-KERNEL_DEVICETREE ?= "socfpga_vt socfpga_cyclone5 socfpga_arria5"
-
 do_deploy_dtb() {
     install -d ${DEPLOY_DIR_IMAGE}
     cd ${DEPLOY_DIR_IMAGE}
+
+    if [ "${KERNEL_PROVIDER}" == "linux-altera" ] ; then 
+       case "${MACHINE}" in
+            arria10)
+                dtss="socfpga_arria10_socdk_sdmmc socfpga_arria10_socdk_qspi" ;;
+            arria10swvp)
+                dtss="socfpga_arria10_swvp" ;;
+            arria5)
+		dtss="socfpga_arria5_socdk" ;;
+	    cyclone5)
+		dtss="socfpga_cyclone5_socdk" ;;
+       esac
+    else 
+        case "${MACHINE}" in
+            arria10)
+                dtss="socfpga_arria10_socdk_sdmmc socfpga_arria10_socdk_qspi" ;;
+            arria10swvp)
+                dtss="socfpga_arria10_swvp" ;;
+            arria5)
+		dtss="socfpga_arria5" ;;
+	    cyclone5)
+		dtss="socfpga_cyclone5" ;; 
+        esac 
+    fi 
+    KERNEL_DEVICETREE="${dtss}"
     if test -n "${KERNEL_DEVICETREE}"; then
         for DTB_FILE in ${KERNEL_DEVICETREE}; do
 	    DTB_SYMLINK_NAME="${DTB_FILE}.dtb"
