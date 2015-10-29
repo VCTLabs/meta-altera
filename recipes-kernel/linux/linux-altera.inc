@@ -84,27 +84,43 @@ do_deploy_dtb() {
        case "${MACHINE}" in
             stratix10swvp)
                 dtss="stratix10_swvp"
-                DTB_SUBDIR="${DTB_SUBDIR}/altera/"
+                DTB_SUBDIR="dts/altera/"
                 ;;
             arria10)
-                dtss="socfpga_arria10_socdk_sdmmc socfpga_arria10_socdk_qspi" ;;
+                dtss="socfpga_arria10_socdk_sdmmc socfpga_arria10_socdk_qspi"
+                DTB_SUBDIR="dts/"
+                ;;
             arria10swvp)
-                dtss="socfpga_arria10_swvp" ;;
+                dtss="socfpga_arria10_swvp"
+                DTB_SUBDIR="dts/"
+                ;;
             arria5)
-		dtss="socfpga_arria5_socdk" ;;
+		dtss="socfpga_arria5_socdk"
+                DTB_SUBDIR="dts/"
+		;;
 	    cyclone5)
-		dtss="socfpga_cyclone5_socdk" ;;
+		dtss="socfpga_cyclone5_socdk"
+                DTB_SUBDIR="dts/"
+		;;
        esac
     else 
         case "${MACHINE}" in
             arria10)
-                dtss="socfpga_arria10_socdk_sdmmc socfpga_arria10_socdk_qspi" ;;
+                dtss="socfpga_arria10_socdk_sdmmc socfpga_arria10_socdk_qspi"
+                DTB_SUBDIR="dts/"
+		;;
             arria10swvp)
-                dtss="socfpga_arria10_swvp" ;;
+                dtss="socfpga_arria10_swvp"
+                DTB_SUBDIR="dts/"
+		;;
             arria5)
-		dtss="socfpga_arria5" ;;
+		dtss="socfpga_arria5"
+                DTB_SUBDIR="dts/"
+		;;
 	    cyclone5)
-		dtss="socfpga_cyclone5" ;; 
+		dtss="socfpga_cyclone5"
+                DTB_SUBDIR="dts/"
+		;;
         esac 
     fi 
     KERNEL_DEVICETREE="${dtss}"
