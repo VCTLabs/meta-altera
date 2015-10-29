@@ -82,6 +82,10 @@ do_deploy_dtb() {
 
     if [ "${KERNEL_PROVIDER}" == "linux-altera" ] ; then 
        case "${MACHINE}" in
+            stratix10swvp)
+                dtss="stratix10_swvp"
+                DTB_SUBDIR="${DTB_SUBDIR}/altera/"
+                ;;
             arria10)
                 dtss="socfpga_arria10_socdk_sdmmc socfpga_arria10_socdk_qspi" ;;
             arria10swvp)
@@ -107,7 +111,7 @@ do_deploy_dtb() {
     if test -n "${KERNEL_DEVICETREE}"; then
         for DTB_FILE in ${KERNEL_DEVICETREE}; do
 	    DTB_SYMLINK_NAME="${DTB_FILE}.dtb"
-	    DEVICE_TREE_OUTPUT="${S}/arch/${ARCH}/boot/${DTB_SUBDIR}${DTB_FILE}.dtb"
+	    DEVICE_TREE_OUTPUT="${S}/arch/${ARCH}/boot/${DTB_SUBDIR}/${DTB_FILE}.dtb"
             DTB_NAME="${DTB_FILE}-${DATETIME}.dtb"
             if [ ! -f ${DEVICE_TREE_OUTPUT} ]; then
                 echo "Warning: ${DEVICE_TREE_OUTPUT} is not available!"
