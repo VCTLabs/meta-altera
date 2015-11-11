@@ -46,15 +46,6 @@ do_configure() {
 		sed -i "s|^.*CONFIG_INITRAMFS_ROOT_GID[ =].*$|CONFIG_INITRAMFS_ROOT_GID=0|g" .config
 		sed -i "s|^.*CONFIG_INITRAMFS_COMPRESSION_NONE[ =].*$|CONFIG_INITRAMFS_COMPRESSION_NONE=y|g" .config
 		oe_runmake oldconfig
-	else
-		rm -f *.cpio
-		echo "Initramfs disabled or can't find valid initramfs ${INITRAMFS_IMAGE_FILE}"
-		sed -i "s|^CONFIG_BLK_DEV_INITRD=.*$|# CONFIG_BLK_DEV_INITRD is not set|g" .config
-		sed -i "s|^CONFIG_INITRAMFS_SOURCE=\".*\"$|# CONFIG_INITRAMFS_SOURCE is not set|g" .config
-		sed -i "s|^CONFIG_INITRAMFS_ROOT_UID=.*$|# CONFIG_INITRAMFS_ROOT_UID is not set|g" .config
-		sed -i "s|^CONFIG_INITRAMFS_ROOT_GID=.*$|# CONFIG_INITRAMFS_ROOT_GID is not set|g" .config
-		sed -i "s|^CONFIG_INITRAMFS_COMPRESSION_NONE=.*$|# CONFIG_INITRAMFS_COMPRESSION_NONE is not set|g" .config
-		oe_runmake oldconfig
 	fi	
 }
 
