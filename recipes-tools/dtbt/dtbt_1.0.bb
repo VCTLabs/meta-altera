@@ -18,7 +18,7 @@ SRC_URI = "${DTBT_REPO};protocol=${DTBT_PROT};branch=${DTBT_BRANCH}"
 FILES_${PN} = "/sbin/dtbt"
 FILES_${PN}-dbg = ""
 
-RDEPENDS_${PN}="python"
+RDEPENDS_${PN}="python python-modules"
 
 PR = "r5"
 
