@@ -9,7 +9,7 @@ S="${WORKDIR}/git"
 DTBT_REPO ?= "git://at-git/dtbt"
 DTBT_PROT ?= "git"
 DTBT_BRANCH ?= "master"
-SRCREV = "0c5b3c460bead5bf82b40f20d65103d00b944b81"
+SRCREV = "feb65a1ff248d03bc390691aa77dad190313a852"
 
 RPROVIDES_${PN} = "dtbt"
 
