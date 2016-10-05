@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=a2ba7b0b13b47f38afcb77908570c045"
 
 S="${WORKDIR}/git"
 
-DTBT_REPO ?= "git://at-git/dtbt"
-DTBT_PROT ?= "git"
+DTBT_REPO ?= "git://github.com/altera-opensource/dtbt"
+DTBT_PROT ?= "https"
 DTBT_BRANCH ?= "master"
 SRCREV = "feb65a1ff248d03bc390691aa77dad190313a852"
 
