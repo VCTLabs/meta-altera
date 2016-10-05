@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
 KERNEL_REPO ?= "git://github.com/altera-opensource/linux-socfpga.git"
 KERNEL_PROT ?= "https"
+KERNEL_TAG ?= "${AUTOREV}"
 
 # Kernel CONFIG_LOCALVERSION
 LINUX_VERSION_EXTENSION ?= "-altera"
@@ -16,6 +17,7 @@ LINUX_VERSION ?= "4.0"
 
 SRCREV ?= "${AUTOREV}"
 SRCREV_machine ?= "${AUTOREV}"
+SRCREV_pn-${PN} = "${KERNEL_TAG}"
 PV = "${LINUX_VERSION}"
 PV_append = "+git${SRCPV}"
 
