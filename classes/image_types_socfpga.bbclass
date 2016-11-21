@@ -78,7 +78,7 @@ generate_28nm_sdcard () {
 	if [ -e "${DEPLOY_DIR_IMAGE}/${SPL_BINARY}-${UBOOT_CONFIG}" ]
 	then
             dd if=${DEPLOY_DIR_IMAGE}/${SPL_BINARY}-${UBOOT_CONFIG} of=${SDCARD} conv=notrunc seek=1 bs=$(expr 1024 \* 1024)
-	elif [ -e "${DEPLOY_DIR_IMAGE}/${SPL_BINARY}-${UBOOT_CONFIG}" ]
+	elif [ -e "${DEPLOY_DIR_IMAGE}/${SPL_BINARY}" ]
 	then
             dd if=${DEPLOY_DIR_IMAGE}/${SPL_BINARY} of=${SDCARD} conv=notrunc seek=1 bs=$(expr 1024 \* 1024)
 	else
