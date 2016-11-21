@@ -29,8 +29,8 @@ IMAGE_FSTYPES ?= "cpio ext3 tar.gz jffs2"
 UBOOT_SUFFIX = "img"
 
 # AV and CV uBoot + SPL mkpimage type binary
-SPL_BINARY_cyclone5 = "u-boot-with-spl.sfp"
-SPL_BINARY_arria5 = "u-boot-with-spl.sfp"
+SPL_BINARY_cyclone5 ?= "u-boot-with-spl.sfp"
+SPL_BINARY_arria5 ?= "u-boot-with-spl.sfp"
 
 
 
