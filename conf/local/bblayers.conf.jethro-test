@@ -1,0 +1,25 @@
+# LAYER_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+LCONF_VERSION = "6"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+POKYROOT = "/home/sarnold/socfpga-bsp/poky"
+
+BBLAYERS ?= " \
+  ${POKYROOT}/meta \
+  ${POKYROOT}/meta-yocto \
+  ${POKYROOT}/meta-altera \
+  ${POKYROOT}/meta-altera-refdes \
+  ${POKYROOT}/meta-small-arm-extra \
+  ${POKYROOT}/meta-openembedded/meta-oe \
+  ${POKYROOT}/meta-openembedded/meta-networking \
+  ${POKYROOT}/meta-openembedded/meta-python \
+  ${POKYROOT}/meta-qt5 \
+  "
+BBLAYERS_NON_REMOVABLE ?= " \
+  ${POKYROOT}/meta \
+  ${POKYROOT}/meta-yocto \
+  "
+#${POKYROOT}/meta-yocto-bsp
