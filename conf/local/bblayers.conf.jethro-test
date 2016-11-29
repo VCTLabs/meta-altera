@@ -5,7 +5,7 @@ LCONF_VERSION = "6"
 BBPATH = "${TOPDIR}"
 BBFILES ?= ""
 
-POKYROOT = "/home/sarnold/socfpga-bsp/poky"
+POKYROOT = "${TOPDIR}/../"
 
 BBLAYERS ?= " \
   ${POKYROOT}/meta \
