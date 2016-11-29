@@ -128,27 +128,25 @@ BBMASK .= "|.*meta-small-arm-extra/recipes-extended/"
 PREFERRED_PROVIDER_virtual/kernel = "linux-altera"
 #PREFERRED_PROVIDER_virtual/kernel = "linux-altera-dev"
 
-## this needs sorting out to get sdcard images, *should* work with yocto
-## although their bbclass makes reference to fsl bsp
-#IMAGE_BOOTLOADER = "u-boot"  # from fsl
-# this is set weakly in the socfpga bbclass
-#SDCARD_ROOTFS ?= "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3"  # from fsl
-
 #IMAGE_BOOT_FILES = "u-boot-spl-${MACHINE}.bin u-boot-${MACHINE}.img"
 PREFERRED_PROVIDER_virtual/bootloader = "u-boot-socfpga"
 PREFERRED_VERSION_u-boot-socfpga = "2016.03+gitAUTOINC+df61a74e68"
 
 UBOOT_SUFFIX = "img"
-IMAGE_FSTYPES += "tar.bz2 ext3 sdcard"
 UBOOT_MACHINE = "socfpga_de0_nano_soc_defconfig"
+
+# this is for socfpga sdcard image class
+BOOT_SCRIPTS = "boot.scr:boot.scr"
 
 #SPL_BINARY_cyclone5 = "u-boot-with-spl.sfp"
 ## the above is default for u-boot; change to below to use quartus preloader
 #SPL_BINARY_cyclone5 = "preloader-mkpimage.bin"
 
-## need specific DT blob for unpatched u-boot to load Quartus output
-## note: set both of these or leave it alone
-KERNEL_DEVICETREE_cyclone5 = "socfpga_cyclone5_de0_sockit.dtb"
+## need specific DT blob for u-boot to load the right Quartus stuff
+## note: set both of these for v2016.03 without uEnv patch
+#KERNEL_DEVICETREE_cyclone5 = "socfpga_cyclone5_de0_sockit.dtb"
+KERNEL_DEVICETREE_cyclone5 = "socfpga_cyclone5_de1_soc.dtb"
+## default altera blob name
 USE_DEVICETREE_BLOB = "socfpga.dtb"
 
 # Extra image configuration defaults
@@ -174,7 +172,10 @@ USE_DEVICETREE_BLOB = "socfpga.dtb"
 # We default to enabling the debugging tweaks.
 
 EXTRA_IMAGE_FEATURES = "debug-tweaks"
-IMAGE_FEATURES += "splash ssh-server-openssh package-management"
+
+IMAGE_FEATURES += "qt4-pkgs splash ssh-server-openssh package-management"
+
+IMAGE_FSTYPES += "tar.bz2 ext3 sdcard"
 
 ROOTLESS_X = "1"
 
@@ -194,18 +195,27 @@ CORE_IMAGE_EXTRA_INSTALL += "\
     distro-feed-configs \
     cpufrequtils \
     gkrellmd \
+    ${REF_DEPS} \
+    ${GRSD_DEPS} \
+    ${LIGHTTPD_EXTRA} \
     ${GSRD_IMAGE_INSTALL} \
+"
+
+REF_DEPS = "de1-soc-audio \
+"
+
+LIGHTTPD_EXTRA = "lighttpd-module-alias lighttpd-module-status \
+        lighttpd-module-setenv lighttpd-module-compress lighttpd-module-redirect \
 "
 
 GSRD_IMAGE_INSTALL += "altera-gsrd-apps altera-gsrd-pio-interrupt \
         altera-gsrd-initscripts lighttpd altera-gsrd-webcontent \
         lighttpd-module-cgi altera-lighttpd-conf \
-        perl gcc ethtool iperf net-tools nfs-utils-client portmap \
-        tcpdump gdbserver mtd-utils openssh \
+"
+
+GRSD_DEPS = "perl gcc ethtool iperf net-tools nfs-utils-client portmap \
+        tcpdump gdbserver mtd-utils openssh perl-misc perl-modules \
         fpga-overlay \
-        lighttpd-module-alias lighttpd-module-status lighttpd-module-setenv \
-        lighttpd-module-compress lighttpd-module-redirect \
-        perl-misc perl-modules \
 "
 
 DL_DIR = "/home/sarnold/shared/downloads"
@@ -231,7 +241,7 @@ LICENSE_FLAGS_WHITELIST = "\
   commercial_mpeg2dec \
   commercial_qmmp"
 
-DISTRO_FEATURES_append = " pam sysvinit udev "
+DISTRO_FEATURES_append = " pam sysvinit udev x11 "
 DISTRO_FEATURES_BACKFILL_CONSIDERED = "multiarch pulseaudio systemd"
 
 
