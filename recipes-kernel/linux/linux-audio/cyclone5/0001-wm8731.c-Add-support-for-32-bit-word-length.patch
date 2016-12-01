@@ -1,0 +1,39 @@
+From 0619f3f9fa377fa2a387a1022c7d4dc6e6f131d6 Mon Sep 17 00:00:00 2001
+From: Stephen Arnold <sarnold@vctlabs.com>
+Date: Wed, 30 Nov 2016 13:21:31 -0800
+Subject: [PATCH 1/2] wm8731.c: Add support for 32-bit word length
+
+* required for socfpga de1-soc-audio project
+
+Signed-off-by: Bjarne Steinsbo <bsteinsbo@gmail.com>
+Signed-off-by: Stephen Arnold <sarnold@vctlabs.com>
+---
+ sound/soc/codecs/wm8731.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/sound/soc/codecs/wm8731.c b/sound/soc/codecs/wm8731.c
+index eebb328..688ee2e 100644
+--- a/sound/soc/codecs/wm8731.c
++++ b/sound/soc/codecs/wm8731.c
+@@ -357,6 +357,9 @@ static int wm8731_hw_params(struct snd_pcm_substream *substream,
+ 	case 24:
+ 		iface |= 0x0008;
+ 		break;
++	case 32:
++		iface |= 0x000c;
++		break;
+ 	}
+ 
+ 	wm8731_set_deemph(codec);
+@@ -531,7 +534,7 @@ static int wm8731_startup(struct snd_pcm_substream *substream,
+ #define WM8731_RATES SNDRV_PCM_RATE_8000_96000
+ 
+ #define WM8731_FORMATS (SNDRV_PCM_FMTBIT_S16_LE | SNDRV_PCM_FMTBIT_S20_3LE |\
+-	SNDRV_PCM_FMTBIT_S24_LE)
++	SNDRV_PCM_FMTBIT_S24_LE | SNDRV_PCM_FMTBIT_S32_LE)
+ 
+ static const struct snd_soc_dai_ops wm8731_dai_ops = {
+ 	.startup	= wm8731_startup,
+-- 
+2.10.0
+
