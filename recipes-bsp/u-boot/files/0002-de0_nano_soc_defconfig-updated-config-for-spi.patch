@@ -1,0 +1,70 @@
+From 75a001a1f35ed7e89181202a2a85ca47423f8e4c Mon Sep 17 00:00:00 2001
+From: Stephen Arnold <sarnold@vctlabs.com>
+Date: Tue, 29 Nov 2016 23:29:30 -0800
+Subject: [PATCH 2/2] de0_nano_soc_defconfig: updated config for spi/other
+ (modified from altera-next)
+
+Signed-off-by: Stephen Arnold <sarnold@vctlabs.com>
+---
+ configs/socfpga_de0_nano_soc_defconfig | 32 ++++++++++++++++++++++++++++----
+ 1 file changed, 28 insertions(+), 4 deletions(-)
+
+diff --git a/configs/socfpga_de0_nano_soc_defconfig b/configs/socfpga_de0_nano_soc_defconfig
+index 65c1197..66f890c 100644
+--- a/configs/socfpga_de0_nano_soc_defconfig
++++ b/configs/socfpga_de0_nano_soc_defconfig
+@@ -1,23 +1,47 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_SOCFPGA=y
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+-CONFIG_SPL_DM=y
+-CONFIG_DM_GPIO=y
+ CONFIG_TARGET_SOCFPGA_TERASIC_DE0_NANO=y
++CONFIG_SPL_BUILD=y
+ CONFIG_SPL_STACK_R_ADDR=0x00800000
+ CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_de0_nano_soc"
++CONFIG_VERSION_VARIABLE=y
+ CONFIG_SPL=y
++# CONFIG_SPL_SYS_MALLOC_SIMPLE is not set
+ CONFIG_SPL_STACK_R=y
++CONFIG_CMD_BOOTZ=y
+ # CONFIG_CMD_IMLS is not set
++CONFIG_CMD_ASKENV=y
++CONFIG_CMD_GREPENV=y
+ # CONFIG_CMD_FLASH is not set
+-CONFIG_CMD_GPIO=y
+ CONFIG_SPL_SIMPLE_BUS=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_MII=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_EXT4=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_FAT=y
++CONFIG_CMD_FPGA=y
++CONFIG_CMD_FS_GENERIC=y
++CONFIG_SPL_DM=y
++CONFIG_DFU_MMC=y
++CONFIG_DM_GPIO=y
+ CONFIG_DWAPB_GPIO=y
++CONFIG_SYS_I2C_DW=y
++CONFIG_DM_MMC=y
+ CONFIG_DM_ETH=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_SYS_NS16550=y
++CONFIG_DM_SPI=y
+ CONFIG_CADENCE_QSPI=y
+ CONFIG_DESIGNWARE_SPI=y
+-CONFIG_DM_MMC=y
+ CONFIG_USB=y
+ CONFIG_DM_USB=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DWC2_OTG=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_G_DNL_MANUFACTURER="terasic"
++CONFIG_USE_TINY_PRINTF=y
+-- 
+2.10.0
+

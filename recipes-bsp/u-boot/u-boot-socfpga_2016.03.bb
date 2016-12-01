@@ -5,6 +5,7 @@ SRCREV = "df61a74e6845ec9bdcdd48d2aff5e9c2c6debeaa"
 
 SRC_URI_append_cyclone5 = " \
         file://0001-socfpga_de0_nano_soc.h-add-boot.scr-support.patch \
+        file://0002-de0_nano_soc_defconfig-updated-config-for-spi.patch \
         file://boot.txt \
 "
 
@@ -18,10 +19,8 @@ PV = "2016.03"
 PV_append = "+git${SRCPV}"
 
 do_compile_append() {
-#    if [ test -e ${WORKDIR}/${UBOOT_ENV}.txt ] ; then
         mkimage -A ${TARGET_ARCH} -O linux -T script -C none -n ${UBOOT_ENV_BINARY} \
              -d ${WORKDIR}/${UBOOT_ENV}.txt ${WORKDIR}/${UBOOT_ENV_BINARY}
-#    fi
 }
 
 DEPENDS += "dtc-native"
