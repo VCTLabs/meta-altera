@@ -6,6 +6,7 @@ COMPATIBLE_MACHINE_cyclone5 = "cyclone5"
 
 SRC_URI_append_cyclone5 = " \
         file://0001-ARM-dts-socfpga_cyclone5_de1_soc.dts-add-initial-fil.patch \
+        file://wm8731-add-support-for-32-bit-word-length.patch \
         file://defconfig \
 "
 
