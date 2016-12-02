@@ -1,8 +1,8 @@
-From 59d558d91ed3e8653f13ae0a269a3353b7cf6c40 Mon Sep 17 00:00:00 2001
+From 26e896e9fe2210f5a387523ad5f894fd3039ceb9 Mon Sep 17 00:00:00 2001
 From: Stephen Arnold <sarnold@vctlabs.com>
 Date: Wed, 30 Nov 2016 18:55:58 -0800
-Subject: [PATCH 2/2] ARM: socfpga_cyclone5_de1_soc.dts: add new file for
- testing audio
+Subject: [PATCH] ARM: socfpga_cyclone5_de1_soc.dts: add new file for testing
+ audio
 
 Signed-off-by: Stephen Arnold <sarnold@vctlabs.com>
 ---
@@ -25,7 +25,7 @@ index 060453d..11ff59b 100644
  	socfpga_cyclone5_socrates.dtb \
 diff --git a/arch/arm/boot/dts/socfpga_cyclone5_de1_soc.dts b/arch/arm/boot/dts/socfpga_cyclone5_de1_soc.dts
 new file mode 100644
-index 0000000..af5b217
+index 0000000..71f0b42
 --- /dev/null
 +++ b/arch/arm/boot/dts/socfpga_cyclone5_de1_soc.dts
 @@ -0,0 +1,272 @@
@@ -110,7 +110,7 @@ index 0000000..af5b217
 +        sound {
 +	        compatible = "opencores,de1soc-wm8731-audio";
 +		i2s-controller = <&i2s>;
-+		audio-codec = <&codec>;
++		audio-codec = <&adxl345>;
 +		//i2c-mux-gpio = <&portb 19 0>;
 +        };
 +
