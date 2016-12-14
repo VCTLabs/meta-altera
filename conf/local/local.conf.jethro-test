@@ -125,8 +125,9 @@ BBMASK .= "|.*meta-small-arm-extra/recipes-bsp/u-boot/"
 BBMASK .= "|.*meta-small-arm-extra/recipes-kernel/"
 BBMASK .= "|.*meta-small-arm-extra/recipes-extended/"
 
+#PREFERRED_PROVIDER_virtual/kernel = "linux-audio"
+#PREFERRED_VERSION_linux-altera = "3.18+gitAUTOINC+034e7cbef5"
 PREFERRED_PROVIDER_virtual/kernel = "linux-altera"
-#PREFERRED_PROVIDER_virtual/kernel = "linux-altera-dev"
 
 #IMAGE_BOOT_FILES = "u-boot-spl-${MACHINE}.bin u-boot-${MACHINE}.img"
 PREFERRED_PROVIDER_virtual/bootloader = "u-boot-socfpga"
@@ -135,19 +136,31 @@ PREFERRED_VERSION_u-boot-socfpga = "2016.03+gitAUTOINC+df61a74e68"
 UBOOT_SUFFIX = "img"
 UBOOT_MACHINE = "socfpga_de0_nano_soc_defconfig"
 
-# this is for socfpga sdcard image class
+# this is for socfpga sdcard image class (also requires boot.scr patch)
 BOOT_SCRIPTS = "boot.scr:boot.scr"
 
 #SPL_BINARY_cyclone5 = "u-boot-with-spl.sfp"
 ## the above is default for u-boot; change to below to use quartus preloader
+## (NOTE the preloader dance is no longer needed if using u-boot qts script)
 #SPL_BINARY_cyclone5 = "preloader-mkpimage.bin"
 
 ## need specific DT blob for u-boot to load the right Quartus stuff
 ## note: set both of these for v2016.03 without uEnv patch
-#KERNEL_DEVICETREE_cyclone5 = "socfpga_cyclone5_de0_sockit.dtb"
-KERNEL_DEVICETREE_cyclone5 = "socfpga_cyclone5_de1_soc.dtb"
+#KERNEL_DEVICETREE_cyclone5 = "socfpga_cyclone5_de1_soc-audio.dtb"
+KERNEL_DEVICETREE_cyclone5 = "socfpga_cyclone5_de1_soc-fb.dtb"
 ## default altera blob name
 USE_DEVICETREE_BLOB = "socfpga.dtb"
+
+VIRTUAL-RUNTIME_dev_manager = "udev"
+VIRTUAL-RUNTIME_login_manager = "busybox"
+VIRTUAL-RUNTIME_init_manager = "sysvinit"
+VIRTUAL-RUNTIME_initscripts = "initscripts"
+VIRTUAL-RUNTIME_keymaps = "keymaps"
+
+#PREFERRED_PROVIDER_virtual/mesa = "mesa"
+#PREFERRED_PROVIDER_virtual/libgl = "mesa"
+#PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
+#PREFERRED_PROVIDER_jpeg-native = "libjpeg-turbo-native"
 
 # Extra image configuration defaults
 #
@@ -195,7 +208,8 @@ CORE_IMAGE_EXTRA_INSTALL += "\
     distro-feed-configs \
     cpufrequtils \
     gkrellmd \
-    ${REF_DEPS} \
+    alsa-utils-speakertest \
+    alsa-utils-amixer \
     ${GRSD_DEPS} \
     ${LIGHTTPD_EXTRA} \
     ${GSRD_IMAGE_INSTALL} \
@@ -218,9 +232,9 @@ GRSD_DEPS = "perl gcc ethtool iperf net-tools nfs-utils-client portmap \
         fpga-overlay \
 "
 
-DL_DIR = "/home/sarnold/shared/downloads"
-SSTATE_DIR = "/home/sarnold/shared/poky/sstate-cache"
-PERSISTENT_DIR = "/home/sarnold/shared/oe-core"
+DL_DIR = "/home/user/shared/downloads"
+SSTATE_DIR = "/home/user/shared/poky/sstate-cache"
+PERSISTENT_DIR = "/home/user/shared/oe-core"
 
 INHERIT += "rm_work"
 INHERIT += "toaster"
