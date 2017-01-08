@@ -1,0 +1,44 @@
+From 93d5d7124ca825febcd908147845417688cf9278 Mon Sep 17 00:00:00 2001
+From: "S. Lockwood-Childs" <sjl@vctlabs.com>
+Date: Sat, 7 Jan 2017 22:59:44 -0800
+Subject: [PATCH] DE1 has LTC connector wired up to SPI1 pins, not SPI0
+
+---
+ arch/arm/boot/dts/socfpga_cyclone5_de1_soc-fb.dts | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/arch/arm/boot/dts/socfpga_cyclone5_de1_soc-fb.dts b/arch/arm/boot/dts/socfpga_cyclone5_de1_soc-fb.dts
+index 23701ad..bba8114 100644
+--- a/arch/arm/boot/dts/socfpga_cyclone5_de1_soc-fb.dts
++++ b/arch/arm/boot/dts/socfpga_cyclone5_de1_soc-fb.dts
+@@ -123,14 +123,6 @@
+ 
+ &spi0 {
+ 	status = "okay";
+-
+-	spidev@0 {
+-		/* spidev causes a WARN_ON() so spoof with DAC compat */
+-		compatible = "rohm,dh2228fv";
+-		reg = <0>;      /* chip select */
+-		spi-max-frequency = <1000000>;
+-		enable-dma = <1>;
+-	};
+ };
+ 
+ &i2c0 {
+@@ -166,4 +158,12 @@
+ 
+ &spi1 {
+ 	status = "okay";
++
++	spidev@0 {
++		/* spidev causes a WARN_ON() so spoof with DAC compat */
++		compatible = "rohm,dh2228fv";
++		reg = <0>;      /* chip select */
++		spi-max-frequency = <1000000>;
++		enable-dma = <1>;
++	};
+ };
+-- 
+2.9.0
+
